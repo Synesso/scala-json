@@ -84,6 +84,8 @@ object Json {
       case x: Long => x.toString
       case list: Seq[AnyRef] =>
         (for (item <- list) yield build(item).body).mkString("[", ",", "]")
+      case set: Set[AnyRef] =>
+        (for (item <- set) yield build(item).body).mkString("[", ",", "]")
       case map: Map[AnyRef, AnyRef] =>
         (for ((key, value) <- map.elements) yield {
           quote(key.toString) + ":" + build(value).body
